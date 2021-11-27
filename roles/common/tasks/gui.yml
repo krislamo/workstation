@@ -1,0 +1,5 @@
+- name: Install KDE
+  apt:
+    name: kde-standard
+    state: present
+    update_cache: true

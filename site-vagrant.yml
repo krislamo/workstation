@@ -1,0 +1,7 @@
+- name: Install Workstation
+  hosts: all
+  become: true
+  vars_files:
+    - inventory.yml
+  roles:
+    - common

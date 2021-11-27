@@ -1,0 +1,23 @@
+- name: Set vagrant user password
+  user:
+    name: vagrant
+    password: "$6$xu0I8bbf.Nva7uCo$OHz5/64u0SjHa1jn0EwCLSNw7Zoj5ejhL\
+               6NtaXYY6zlC0CQa0J4kZIxAp2Ls4lMdLmuo7oMQX/vlDucR9BbcA."
+
+- name: Install fasttrack archive keyring
+  apt:
+    name: fasttrack-archive-keyring
+    state: present
+
+- name: Enable fasttrack
+  copy:
+    dest: /etc/apt/sources.list.d/fasttrack.list
+    content: |
+      deb https://fasttrack.debian.net/debian-fasttrack/ bullseye-fasttrack main contrib
+      deb https://fasttrack.debian.net/debian-fasttrack/ bullseye-backports-staging main contrib
+
+- name: Install guest additions
+  apt:
+    name: virtualbox-guest-x11
+    state: present
+    update_cache: true

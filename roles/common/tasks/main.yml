@@ -1,0 +1,6 @@
+- import_tasks: development.yml
+  tags: development
+  when: development
+
+- import_tasks: gui.yml
+  tags: gui
