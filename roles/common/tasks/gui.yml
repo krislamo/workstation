@@ -3,3 +3,20 @@
     name: kde-standard
     state: present
     update_cache: true
+
+- name: Create autostart-scripts directory
+  file:
+    path: "/home/{{ item.name }}/.config/autostart-scripts/"
+    state: directory
+  loop: "{{ users }}"
+
+- name: Enable KDE dark theme
+  copy:
+    dest: "/home/{{ item.name }}/.config/autostart-scripts/darkmode.sh"
+    mode: a+x
+    content: |
+      #!/bin/bash
+      if ! grep -q "ColorScheme=BreezeDark" ~/.config/kdeglobals; then
+        lookandfeeltool -a $(lookandfeeltool --list | grep dark)
+      fi
+  loop: "{{ users }}"

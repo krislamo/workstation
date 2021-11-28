@@ -1,2 +1,5 @@
 # Settings convenient for development in vagrant
 development: true
+
+users:
+  - name: vagrant
