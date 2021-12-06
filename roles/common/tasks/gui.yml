@@ -20,3 +20,21 @@
         lookandfeeltool -a $(lookandfeeltool --list | grep dark)
       fi
   loop: "{{ users }}"
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+  loop: "{{ packages }}"
+
+- name: Install sqlite3
+  apt:
+    name: sqlite3
+    state: present
+
+- name: Change favorites menu
+  template:
+    src: favorites.sh.j2
+    dest: "/home/{{ item.name }}/.config/autostart-scripts/favorites.sh"
+    mode: a+x
+  loop: "{{ users }}"
+  tags: debug

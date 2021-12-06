@@ -1,0 +1,24 @@
+# Follows homelab package list:
+# https://github.com/krislamo/moxie/blob/master/roles/base/defaults/main.yml
+moxie_packages:
+  - cryptsetup
+  - curl
+  - dnsutils
+  - hashdeep
+  - htop
+  - jq
+  - kpartx
+  - ncdu
+  - rsync
+  - screen
+  - strace
+  - tree
+  - vim
+  - wget
+
+packages:
+  - "{{ moxie_packages }}"
+  - firefox-esr
+  - meld
+  - remmina
+  - terminator

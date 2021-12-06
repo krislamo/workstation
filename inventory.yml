@@ -3,3 +3,8 @@ development: true
 
 users:
   - name: vagrant
+
+favorites:
+  - firefox-esr.desktop
+  - terminator.desktop
+  - org.remmina.Remmina.desktop

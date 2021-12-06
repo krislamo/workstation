@@ -8,6 +8,7 @@
   apt:
     name: fasttrack-archive-keyring
     state: present
+    update_cache: true
 
 - name: Enable fasttrack
   copy:

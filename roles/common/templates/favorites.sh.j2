@@ -1,0 +1,18 @@
+#!/bin/bash
+
+sqlite3 ~/.local/share/kactivitymanagerd/resources/database <<-EOF
+	CREATE TEMPORARY TABLE FavoritesList (usedActivity TEXT, initiatingAgent TEXT, targettedResource TEXT);
+	INSERT INTO FavoritesList (usedActivity, initiatingAgent, targettedResource)
+	VALUES
+{% for item in favorites %}
+		(":global", "org.kde.plasma.favorites.applications", "{{ item }}"){{ "," if not loop.last else ";" }}
+{% endfor %}
+
+	INSERT INTO ResourceLink (usedActivity, initiatingAgent, targettedResource)
+	SELECT f.usedActivity, f.initiatingAgent, f.targettedResource
+	FROM FavoritesList AS f
+	WHERE f.targettedResource NOT IN (SELECT targettedResource FROM ResourceLink);
+
+	DELETE FROM ResourceLink
+	WHERE targettedResource NOT IN (SELECT targettedResource FROM FavoritesList);
+EOF
