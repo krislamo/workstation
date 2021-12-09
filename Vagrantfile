@@ -5,7 +5,9 @@ Vagrant.configure("2") do |config|
 
   # Boot with a GUI in VirtualBox
   config.vm.provider "virtualbox" do |vbox|
-    vbox.customize ["modifyvm", :id, "--vram", "128"]
+    vbox.customize ["modifyvm", :id, "--vram", "128",
+                    "--graphicscontroller", "vboxvga",
+                    "--accelerate3d", "on"]
     vbox.memory = 4096
     vbox.cpus = 2
     vbox.gui = true

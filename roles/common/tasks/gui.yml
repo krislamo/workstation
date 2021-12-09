@@ -6,13 +6,15 @@
 
 - name: Create autostart-scripts directory
   file:
-    path: "/home/{{ item.name }}/.config/autostart-scripts/"
+    path: "{{ homedir }}/.config/autostart-scripts/"
     state: directory
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
   loop: "{{ users }}"
 
 - name: Enable KDE dark theme
   copy:
-    dest: "/home/{{ item.name }}/.config/autostart-scripts/darkmode.sh"
+    dest: "{{ homedir }}/.config/autostart-scripts/darkmode.sh"
     mode: a+x
     content: |
       #!/bin/bash
@@ -34,7 +36,6 @@
 - name: Change favorites menu
   template:
     src: favorites.sh.j2
-    dest: "/home/{{ item.name }}/.config/autostart-scripts/favorites.sh"
+    dest: "{{ homedir }}/.config/autostart-scripts/favorites.sh"
     mode: a+x
   loop: "{{ users }}"
-  tags: debug

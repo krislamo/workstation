@@ -7,4 +7,5 @@ users:
 favorites:
   - firefox-esr.desktop
   - terminator.desktop
+  - org.kde.dolphin.desktop
   - org.remmina.Remmina.desktop

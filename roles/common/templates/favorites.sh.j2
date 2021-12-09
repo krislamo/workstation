@@ -1,5 +1,12 @@
 #!/bin/bash
 
+FAVORITES="{% for item in favorites %}{{ item }}{{ ',' if not loop.last else '' }}{% endfor %}"
+if [ -f ~/.config/kactivitymanagerd-statsrc ]; then
+	if ! grep -q "$FAVORITES" ~/.config/kactivitymanagerd-statsrc; then
+		sed -i "/^ordering/s/=.*/=$FAVORITES/" ~/.config/kactivitymanagerd-statsrc
+	fi
+fi
+
 sqlite3 ~/.local/share/kactivitymanagerd/resources/database <<-EOF
 	CREATE TEMPORARY TABLE FavoritesList (usedActivity TEXT, initiatingAgent TEXT, targettedResource TEXT);
 	INSERT INTO FavoritesList (usedActivity, initiatingAgent, targettedResource)

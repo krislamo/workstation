@@ -1,3 +1,5 @@
+homedir: "/home/{{ item.name }}"
+
 # Follows homelab package list:
 # https://github.com/krislamo/moxie/blob/master/roles/base/defaults/main.yml
 moxie_packages:
