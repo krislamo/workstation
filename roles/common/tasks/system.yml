@@ -1,0 +1,23 @@
+- name: Install software
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: true
+
+- name: Create system users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: present
+    groups: "{{ item.groups }}"
+    append: yes
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    create_home: "{{ item.home | default(false) }}"
+  loop: "{{ users }}"
+  when: users is defined
+
+- name: Change favorites menu
+  ansible.builtin.template:
+    src: favorites.sh.j2
+    dest: "{{ homedir }}/.config/autostart-scripts/favorites.sh"
+    mode: a+x
+  loop: "{{ users }}"

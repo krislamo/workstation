@@ -1,11 +1,28 @@
 # Settings convenient for development in vagrant
 development: true
 
+packages:
+  # GUI applications
+  - firefox-esr
+  - terminator
+  - remmina
+
+  # Virtualization
+  - qemu-system
+  - vagrant-libvirt
+  - libvirt-daemon-system
+
 users:
   - name: vagrant
+    groups:
+      - libvirt
 
 favorites:
   - firefox-esr.desktop
   - terminator.desktop
   - org.kde.dolphin.desktop
   - org.remmina.Remmina.desktop
+
+pinned:
+  - firefox-esr.desktop
+  - terminator.desktop

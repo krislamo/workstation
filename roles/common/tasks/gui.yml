@@ -1,5 +1,5 @@
 - name: Install KDE
-  apt:
+  ansible.builtin.apt:
     name: kde-standard
     state: present
     update_cache: true
@@ -24,18 +24,33 @@
   loop: "{{ users }}"
 
 - name: Install packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
   loop: "{{ packages }}"
 
 - name: Install sqlite3
-  apt:
+  ansible.builtin.apt:
     name: sqlite3
     state: present
 
 - name: Change favorites menu
-  template:
+  ansible.builtin.template:
     src: favorites.sh.j2
     dest: "{{ homedir }}/.config/autostart-scripts/favorites.sh"
     mode: a+x
+  loop: "{{ users }}"
+
+- name: Change task manager pinned apps
+  ansible.builtin.template:
+    src: pinnedapps.sh.j2
+    dest: "{{ homedir }}/.config/autostart-scripts/pinnedapps.sh"
+    mode: a+x
+  loop: "{{ users }}"
+
+- name: Ensure we have our own comment added to /etc/services
+  ansible.builtin.lineinfile:
+    path: "{{ homedir }}/.config/autostart-scripts/pinnedapps.sh"
+    regexp: '^# port for http'
+    insertbefore: '^www.*80/tcp'
+    line: '# port for http by default'
   loop: "{{ users }}"

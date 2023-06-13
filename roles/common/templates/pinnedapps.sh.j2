@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PINNED="{% for item in pinned %}{{ item }}{{ ',' if not loop.last else '' }}{% endfor %}"
+FILE="~/.config/plasma-org.kde.plasma.desktop-appletsrc"
+HEADER="[Containments][2][Applets][5][Configuration][General]"
+SECTIONUNDER="[Containments][2][Applets][6]"
+if [ -f "$FILE" ]; then
+	if ! grep -q "$PINNED" "$FILE"; then
+		sed -i "/^$HEADER\nlaunchers=.*/i\n\n$SECTIONUNDER" "$FILE"
+	fi
+fi

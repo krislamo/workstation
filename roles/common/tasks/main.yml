@@ -1,6 +1,12 @@
-- import_tasks: development.yml
+- name: Import development vagrant tasks
+  ansible.builtin.import_tasks: development.yml
   tags: development
   when: development
 
-- import_tasks: gui.yml
+- name: Import system tasks
+  ansible.builtin.import_tasks: system.yml
+  tags: system
+
+- name: Import GUI tasks
+  ansible.builtin.import_tasks: gui.yml
   tags: gui
