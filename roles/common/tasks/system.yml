@@ -14,10 +14,3 @@
     create_home: "{{ item.home | default(false) }}"
   loop: "{{ users }}"
   when: users is defined
-
-- name: Change favorites menu
-  ansible.builtin.template:
-    src: favorites.sh.j2
-    dest: "{{ homedir }}/.config/autostart-scripts/favorites.sh"
-    mode: a+x
-  loop: "{{ users }}"
