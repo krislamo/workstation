@@ -2,7 +2,7 @@ darkmode: false
 homedir: "/home/{{ item.name }}"
 
 # Follows homelab package list:
-# https://github.com/krislamo/homelab/blob/main/roles/base/defaults/main.yml#L5
+# https://git.krislamo.org/kris/homelab/src/branch/main/roles/base/defaults/main.yml#L6
 homelab_packages:
   - apache2-utils
   - cryptsetup
