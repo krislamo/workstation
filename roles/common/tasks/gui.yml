@@ -11,6 +11,7 @@
     owner: "{{ item.name }}"
     group: "{{ item.name }}"
   loop: "{{ users }}"
+  when: manage_gui
 
 - name: Enable KDE dark theme
   copy:
@@ -22,11 +23,13 @@
         lookandfeeltool -a $(lookandfeeltool --list | grep dark)
       fi
   loop: "{{ users }}"
+  when: manage_gui and darkmode
 
 - name: Install sqlite3
   ansible.builtin.apt:
     name: sqlite3
     state: present
+  when: manage_gui and favorites is defined or pinned is defined
 
 - name: Change favorites menu
   ansible.builtin.template:
@@ -34,6 +37,7 @@
     dest: "{{ homedir }}/.config/autostart-scripts/favorites.sh"
     mode: a+x
   loop: "{{ users }}"
+  when: manage_gui and favorites is defined
 
 - name: Change task manager pinned apps
   ansible.builtin.template:
@@ -41,3 +45,4 @@
     dest: "{{ homedir }}/.config/autostart-scripts/pinnedapps.sh"
     mode: a+x
   loop: "{{ users }}"
+  when: manage_gui and pinned is defined

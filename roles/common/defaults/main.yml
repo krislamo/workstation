@@ -1,3 +1,4 @@
+darkmode: false
 homedir: "/home/{{ item.name }}"
 
 # Follows homelab package list:
@@ -19,5 +20,6 @@ homelab_packages:
   - vim
   - wget
 
+manage_gui: false
 packages:
   - "{{ homelab_packages }}"
