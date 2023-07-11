@@ -9,8 +9,12 @@ packages:
 
   # Virtualization
   - qemu-system
-  - vagrant-libvirt
   - libvirt-daemon-system
+  - vagrant-libvirt
+  - virt-manager
+
+  # Configuration management
+  - ansible
 
 users:
   - name: vagrant
