@@ -5,16 +5,17 @@
     update_cache: true
 
 - name: Create autostart-scripts directory
-  file:
+  ansible.builtin.file:
     path: "{{ homedir }}/.config/autostart-scripts/"
     state: directory
     owner: "{{ item.name }}"
     group: "{{ item.name }}"
+    mode: 0700
   loop: "{{ users }}"
   when: manage_gui
 
 - name: Enable KDE dark theme
-  copy:
+  ansible.builtin.copy:
     dest: "{{ homedir }}/.config/autostart-scripts/darkmode.sh"
     mode: a+x
     content: |

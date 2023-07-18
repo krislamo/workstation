@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ENV['ANSIBLE_ROLES_PATH'] = File.dirname(__FILE__) + "/roles"
     ansible.compatibility_mode = "2.0"
-    ansible.playbook = "site-vagrant.yml"
-    ansible.raw_arguments  = ["--diff"]
+    ansible.playbook = "dev/workstation.yml"
+    ansible.raw_arguments = ["--diff"]
   end
 end

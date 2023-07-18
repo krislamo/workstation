@@ -1,4 +1,5 @@
 darkmode: false
+development: false
 homedir: "/home/{{ item.name }}"
 
 # Follows homelab package list:

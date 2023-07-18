@@ -1,0 +1,5 @@
+- name: Install Workstation
+  hosts: localhost
+  become: true
+  roles:
+    - common

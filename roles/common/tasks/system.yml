@@ -9,7 +9,7 @@
     name: "{{ item.name }}"
     state: present
     groups: "{{ item.groups }}"
-    append: yes
+    append: true
     shell: "{{ item.shell | default('/bin/bash') }}"
     create_home: "{{ item.home | default(false) }}"
   loop: "{{ users }}"
